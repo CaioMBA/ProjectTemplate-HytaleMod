@@ -1,4 +1,8 @@
-rootProject.name = "dev.hytalemodding"
+val pluginGroup = providers.gradleProperty("plugin_group").getOrElse("dev.ofatech")
+val pluginName = providers.gradleProperty("plugin_name").getOrElse("ProjectTemplateHytaleMod")
+val pluginMain = providers.gradleProperty("plugin_main").getOrElse("dev.ofatech.hytale.template.TemplatePlugin")
+
+rootProject.name = pluginName
 
 plugins {
     // See documentation on https://scaffoldit.dev
@@ -18,11 +22,12 @@ hytale {
 
     dependencies {
         // Any external dependency you also want to include
+        implementation("com.google.code.gson:gson:2.10.1")
     }
 
     manifest {
-        Group = "HytaleModding"
-        Name = "ExamplePlugin"
-        Main = "dev.hytalemodding.ExamplePlugin"
+        Group = pluginGroup
+        Name = pluginName
+        Main = pluginMain
     }
 }
