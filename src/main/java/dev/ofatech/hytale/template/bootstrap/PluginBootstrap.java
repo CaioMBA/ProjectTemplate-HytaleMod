@@ -92,10 +92,9 @@ public final class PluginBootstrap {
 
         featureManager.enableConfigured(context);
 
+        logInfo(context, "Bootstrapping " + modules.size() + " module(s)");
         for (PluginModule module : modules) {
-            if (debug) {
-                logInfo(context, "Setting up module: " + module.name());
-            }
+            logInfo(context, "Setting up module: " + module.name());
             try {
                 module.setup(context);
                 if (debug) {

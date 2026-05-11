@@ -16,7 +16,8 @@ import java.util.Objects;
 public final class ConfigManager {
     private static final String DEFAULT_RESOURCE = "config.default.json";
 
-    private final TemplatePlugin plugin;
+    private final ClassLoader classLoader;
+    private final String pluginName;
     private final Gson gson;
     private final Path configDirectory;
     private final Path configFile;
@@ -25,9 +26,17 @@ public final class ConfigManager {
     private ConfigView view;
 
     public ConfigManager(TemplatePlugin plugin) {
-        this.plugin = Objects.requireNonNull(plugin, "plugin");
+        this(
+            Objects.requireNonNull(plugin, "plugin").getClass().getClassLoader(),
+            plugin.getClass().getSimpleName()
+        );
+    }
+
+    ConfigManager(ClassLoader classLoader, String pluginName) {
+        this.classLoader = Objects.requireNonNull(classLoader, "classLoader");
+        this.pluginName = Objects.requireNonNull(pluginName, "pluginName");
         this.gson = new GsonBuilder().setPrettyPrinting().create();
-        this.configDirectory = Paths.get("config").resolve(plugin.getClass().getSimpleName());
+        this.configDirectory = Paths.get("config").resolve(pluginName);
         this.configFile = configDirectory.resolve("config.json");
     }
 
@@ -94,7 +103,7 @@ public final class ConfigManager {
     }
 
     private void copyDefaultConfig() {
-        try (InputStream input = plugin.getClass().getClassLoader().getResourceAsStream(DEFAULT_RESOURCE)) {
+        try (InputStream input = classLoader.getResourceAsStream(DEFAULT_RESOURCE)) {
             if (input == null) {
                 throw new ConfigException("Missing default config resource: " + DEFAULT_RESOURCE);
             }

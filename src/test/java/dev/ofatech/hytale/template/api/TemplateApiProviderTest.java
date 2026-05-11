@@ -37,6 +37,16 @@ class TemplateApiProviderTest {
         assertThrows(IllegalStateException.class, TemplateApiProvider::get);
     }
 
+    @Test
+    void unregisterClearsProvider() {
+        TemplateApiProvider.register(new StubApi());
+
+        TemplateApiProvider.unregister();
+
+        assertFalse(TemplateApiProvider.isAvailable());
+        assertThrows(IllegalStateException.class, TemplateApiProvider::get);
+    }
+
     private static final class StubApi implements TemplateApi {
         @Override
         public String pluginId() {

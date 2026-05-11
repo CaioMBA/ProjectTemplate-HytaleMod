@@ -1,24 +1,32 @@
 # Integrations
 
-Integrations are optional and should be easy to disable.
+Integrations are optional and should be easy to enable/disable without affecting core gameplay.
 
 ## Guidelines
 - Keep integrations behind interfaces.
 - Do not expose secrets or internal config.
 
-## Optional REST API
+## Integration registry
 
-The REST API is disabled by default. When enabled, it binds to `127.0.0.1`
-and requires a token for all endpoints except `/health`.
+`IntegrationRegistry` manages integration lifecycles and reports status for debug output. Each
+integration implements `PluginIntegration` or `OptionalPluginIntegration` and can be toggled on
+or off at runtime based on config.
 
-Endpoints:
-- `GET /health`
-- `GET /version`
-- `GET /config/public`
-- `GET /players/{id}`
-- `POST /reload` (only if `api.allowReloadEndpoint=true`)
+## Webhook client
 
-Authentication header:
+`WebhookClient` is a small HTTP client that sends JSON payloads to a configured URL. It is used by
+optional integrations and does not log sensitive data.
 
-`Authorization: Bearer <token>`
+## Optional integrations
+
+- `DiscordWebhookIntegration`: a disabled-by-default example that posts to a Discord webhook when
+  configured.
+
+## Future integrations (not implemented yet)
+
+- Economy providers.
+- Permission systems.
+- External analytics.
+
+For REST API usage, see `docs/rest-api.md`.
 
