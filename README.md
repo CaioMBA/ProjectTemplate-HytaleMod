@@ -1,84 +1,31 @@
-# Hytale Plugin Template
+# Hytale Java Plugin Architecture Template
 
-This repository is a ready-to-reuse template for Hytale server plugins using Java and the
-ScaffoldIt runtime. It includes a small, testable core (config, data, messages, event bus, public
-API) plus optional integrations like a local REST API.
+This repository is a **cloneable Hytale Java plugin architecture template**.
+It is intended to be copied and renamed for new plugin/mod projects.
 
-## Requirements
+## What this template is
 
-- Java: JDK 25 is recommended by the current ScaffoldIt/Hytale tooling. If your environment uses a
-  different version, update the project to match your setup.
-- Gradle: the wrapper scripts (`gradlew`, `gradlew.bat`) are included.
-- Hytale/ScaffoldIt: this template assumes the ScaffoldIt plugin runtime and Hytale server assets.
+- A starter project with a **DDD-inspired folder structure** adapted for Java/Hytale.
+- A template that keeps the plugin entrypoint thin and separates concerns.
+- A reference for where to place public API contracts, domain code, services, and platform integration.
 
-## Quick start
+## What this template is not
 
-1. Use GitHub "Use this template" or clone the repo.
-2. Open the project in your IDE (IntelliJ IDEA is a common choice).
-3. Run a local build to verify the setup.
+- Not a shared runtime framework dependency.
+- Not a global cross-mod API registry.
+- Not a ServiceLoader-based integration framework.
 
-```bash
-./gradlew build
-```
+## Architecture summary
 
-On Windows, use `gradlew.bat`:
+- `TemplatePlugin` is the entrypoint and should stay thin.
+- `platform` contains Hytale-specific code (commands, events, adapters).
+- `core` contains domain, service, and infrastructure internals.
+- `api` is a placeholder for the public API surface of the mod you build from this template.
 
-```powershell
-.\gradlew.bat build
-```
+## Documentation
 
-## Run the dev server
-
-If ScaffoldIt provides the `devServer` task in your environment, you can run it to launch a local
-server with hot-reload. On Windows, use `gradlew.bat`.
-
-```bash
-./gradlew devServer
-```
-
-## Build the plugin jar
-
-The build task produces a jar under `build/libs`.
-
-```bash
-./gradlew build
-```
-
-## Rename the template
-
-Follow the checklist in `docs/using-this-template.md` to rename the package, update metadata, and
-replace the example modules.
-
-## Included features
-
-- JSON config with validation and reload support.
-- JSON data store with path safety and schema versioning.
-- Message localization with placeholders.
-- Internal event bus.
-- Public Java API (`dev.ofatech.hytale.template.api`).
-- Lightweight command framework and example commands.
-- Integration registry + webhook client (optional integrations).
-- Optional REST API (disabled by default, bound to `127.0.0.1`).
-- Feature toggles to enable/disable example behaviors.
-- Unit tests and a CI workflow.
-
-## Current limitations
-
-- Storage is JSON-only by default (no database adapters yet).
-- The REST API is local-only unless you explicitly change the host.
-- Command registration uses direct command names by default; adapt to a subcommand tree if needed.
-- Hytale server APIs are evolving; keep direct calls isolated in modules/bootstrap.
-
-## Notes
-
-- This is a server-side Hytale Java plugin template.
-- Hytale modding APIs may evolve; keep integrations isolated and update as needed.
-- The REST API is optional and disabled by default.
-- Other plugins should prefer the Java API integration (`dev.ofatech.hytale.template.api`).
-
-## Resources
-
-- [Hytale Modding Guides](https://hytalemodding.dev)
-- [Hytale Modding Discord](https://discord.gg/hytalemodding)
-- [ScaffoldIt Plugin Docs](https://scaffoldit.dev)
-
+- [Architecture](docs/architecture.md)
+- [Folder Structure](docs/folder-structure.md)
+- [Rename Guide](docs/rename-guide.md)
+- [API Folder Guide](docs/api-folder.md)
+- [Examples](docs/examples.md)

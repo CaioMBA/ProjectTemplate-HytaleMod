@@ -1,5 +1,5 @@
 {
-    "Group": "dev.ofatech",
+    "Group": "net.ofatech",
     "Name": "ProjectTemplateHytaleMod",
     "Version": "0.1.0",
     "Description": "Description of your plugin",
@@ -16,5 +16,5 @@
     "Dependencies": {},
     "OptionalDependencies": {},
     "ServerVersion": "*",
-    "Main": "dev.ofatech.hytale.template.TemplatePlugin"
+    "Main": "net.ofatech.hytale.template.TemplatePlugin"
 }
