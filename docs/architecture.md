@@ -1,34 +1,36 @@
 # Architecture
 
-This template keeps core plugin logic small and modular, with explicit boundaries between
-Hytale runtime APIs and testable services.
+This repository is a **cloneable Hytale plugin architecture template**. It is a project starter, not a shared runtime framework.
 
-```
-Hytale Plugin Runtime
-		↓
-TemplatePlugin
-		↓
-PluginBootstrap
-		↓
-PluginContext
-		↓
-Modules / Features / Services
-		↓
-Public Java API + Optional REST API
-```
+## Layers
 
-## Core components
+1. **Root plugin entrypoint** (`TemplatePlugin`)
+   - Bootstraps the plugin.
+   - Registers platform commands/events.
+   - Should remain thin.
 
-- `TemplatePlugin`: entry point provided to the Hytale runtime.
-- Bootstrap: `PluginBootstrap` builds the `PluginContext`, loads config/messages, and installs
-  modules and services.
-- Modules: `PluginModule` implementations register commands, events, and integrations.
-- Plugin context: `PluginContext` holds shared services (config, messages, data, event bus, API).
-- Config: `ConfigManager` loads `config.default.json`, validates, and exposes a safe `ConfigView`.
-- Data store: `JsonDataStore` provides JSON persistence with path safety and schema versions.
-- Event bus: `SimpleEventBus` lets internal services publish/subscribe without Hytale dependencies.
-- Public API: `TemplateApi` exposes safe, read-only access for other plugins.
-- Integrations: `IntegrationRegistry` and optional integrations (for example, webhook-based).
-- REST API: `RestApiServer` is optional, disabled by default, and bound to `127.0.0.1` by default.
-- Features: `FeatureManager` toggles optional behaviors based on config.
+2. **API** (`api`)
+   - Public-facing contracts for the real mod you create from this template.
+   - Placeholder only in this template.
 
+3. **Core Domain** (`core/domain`)
+   - Pure business/domain concepts.
+   - No Hytale API imports.
+
+4. **Core Service** (`core/service`)
+   - Use-cases, orchestration, validation, algorithms.
+   - Can depend on domain.
+
+5. **Core Infrastructure** (`core/infrastructure`)
+   - Technical adapters: file IO, API clients, persistence implementations, logging, etc.
+
+6. **Platform** (`platform`)
+   - Hytale-specific integration.
+   - Commands, event handlers, lifecycle hooks, registries, screen integration.
+
+## Dependency rules
+
+- `platform` may call `core/service` and `core/domain`.
+- `core/service` may use `core/domain`.
+- `core/domain` must not depend on `platform` or Hytale APIs.
+- Any Hytale-specific import belongs in `platform`.
