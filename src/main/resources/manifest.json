@@ -1,7 +1,7 @@
 {
-    "Group": "net.ofatech",
+    "Group": "dev.ofatech",
     "Name": "ProjectTemplateHytaleMod",
-    "Version": "0.1.0",
+    "Version": "0.0.1",
     "Description": "Description of your plugin",
     "Authors": [
         {
