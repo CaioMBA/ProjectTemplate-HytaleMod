@@ -1,6 +1,6 @@
 val pluginGroup = providers.gradleProperty("plugin_group").getOrElse("net.ofatech")
 val pluginName = providers.gradleProperty("plugin_name").getOrElse("ProjectTemplateHytaleMod")
-val pluginMain = providers.gradleProperty("plugin_main").getOrElse("net.ofatech.hytale.template.TemplatePlugin")
+val pluginMain = providers.gradleProperty("plugin_main").getOrElse("net.ofatech.hytaletemplate.TemplatePlugin")
 
 rootProject.name = pluginName
 

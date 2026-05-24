@@ -2,19 +2,19 @@
     "Group": "dev.ofatech",
     "Name": "ProjectTemplateHytaleMod",
     "Version": "0.0.1",
-    "Description": "Description of your plugin",
+    "Description": "${plugin_description}",
     "Authors": [
         {
-            "Name": "Your Name",
-            "Email": "your.email@example.com",
-            "Url": "https://your-website.com"
+            "Name": "${plugin_author_name}",
+            "Email": "${plugin_author_email}",
+            "Url": "${plugin_author_url}"
         }
     ],
-    "Website": "https://your-plugin-website.com",
+    "Website": "${plugin_website}",
     "DisabledByDefault": false,
     "IncludesAssetPack": false,
     "Dependencies": {},
     "OptionalDependencies": {},
-    "ServerVersion": "*",
-    "Main": "net.ofatech.hytale.template.TemplatePlugin"
+    "ServerVersion": "${server_version}",
+    "Main": "net.ofatech.hytaletemplate.TemplatePlugin"
 }
