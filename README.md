@@ -3,6 +3,11 @@
 This repository is a **cloneable Hytale Java plugin architecture template**.
 It is intended to be copied and renamed for new plugin/mod projects.
 
+## Project status
+
+This template is stable and intentionally minimal.
+There is no planned feature roadmap right now, but issues and PRs are welcome.
+
 ## What this template is
 
 - A starter project with a **DDD-inspired folder structure** adapted for Java/Hytale.
@@ -14,6 +19,13 @@ It is intended to be copied and renamed for new plugin/mod projects.
 - Not a shared runtime framework dependency.
 - Not a global cross-mod API registry.
 - Not a ServiceLoader-based integration framework.
+
+## Quick start
+
+- Update metadata in `gradle.properties` (name, group, description, version, authors).
+- Rename `TemplatePlugin` and its package, then update `plugin_main` in `gradle.properties`.
+- Remove or replace the example command/event classes once you have your own.
+- Follow the [Rename Guide](docs/rename-guide.md) for a step-by-step checklist.
 
 ## Architecture summary
 
